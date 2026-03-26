@@ -35,17 +35,10 @@
       # 2. Parse metadata from the DKMS repo's PKGBUILD for ASUS firmware
       pkgbuild = builtins.readFile "${repoSrc}/PKGBUILD";
 
-      driverFilename =
-        let
-          m = builtins.match ".*_driver_filename='([^']+)'.*" pkgbuild;
-        in
-        if m != null then builtins.head m else "DRV_WiFi_MTK_MT7925_MT7927_TP_W11_64_V5603998_20250709R.zip";
-
-      driverSha256Hex =
-        let
-          m = builtins.match ".*_driver_sha256='([a-f0-9]+)'.*" pkgbuild;
-        in
-        if m != null then builtins.head m else "b377fffa28208bb1671a0eb219c84c62fba4cd6f92161b74e4b0909476307cc8";
+      # NOTE: This is a firmware distributed for the ASUS ROG STRIX B850-E
+      #       motherboard
+      driverFilename = "DRV_WiFi_MTK_MT7925_27_SZ-TSD_W11_64_V5704669_20251201R.zip";
+      driverSha256Hex = "8a41fa06cdf14033e4d88d5a87ab3b64f20dd97019223fd1bd41a7e3fd4aee35";
 
       # 3. Patch lists — read from versions.json, populated by the
       #    auto-update workflow which resolves them from the upstream
